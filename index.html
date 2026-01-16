@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Draw Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="lib/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Controls -->
+        <aside class="sidebar glass-panel">
+            <h1 class="logo">Lucky Draw ✨</h1>
+
+            <div class="control-group">
+                <label for="excelInput" class="custom-file-upload">
+                    📂 Upload Excel Data
+                </label>
+                <input type="file" id="excelInput" accept=".xlsx, .xls">
+                <div id="fileInfo" class="status-text">No file loaded</div>
+            </div>
+
+            <div class="control-group">
+                <label for="bgInput" class="custom-file-upload">
+                    🖼️ Change Background
+                </label>
+                <input type="file" id="bgInput" accept="image/*">
+            </div>
+
+            <div class="control-group">
+                <label>⏱️ Delay (Seconds)</label>
+                <input type="range" id="delayInput" min="1" max="10" value="5" step="0.5">
+                <div class="range-value"><span id="delayValue">5</span>s</div>
+            </div>
+
+            <div class="control-group">
+                <label>🎲 Draw Quantity</label>
+                <div class="buttons-grid">
+                    <button class="draw-btn" data-count="1">1 Person</button>
+                    <button class="draw-btn" data-count="3">3 People</button>
+                    <button class="draw-btn" data-count="5">5 People</button>
+                    <button class="draw-btn" data-count="10">10 People</button>
+                    <button class="draw-btn" data-count="20">20 People</button>
+                </div>
+                <!-- Custom Input -->
+                <div class="custom-draw-group">
+                    <input type="number" id="customDrawInput" placeholder="Custom" min="1" max="100">
+                    <button id="customDrawBtn" class="draw-btn">Go</button>
+                </div>
+            </div>
+
+            <div class="control-group mt-auto">
+                <button id="resetBtn" class="danger-btn">Reset All</button>
+            </div>
+        </aside>
+
+        <!-- Main Display Arena -->
+        <main class="main-arena">
+            <div id="rollingContainer" class="rolling-container glass-panel">
+                <div id="readyText" class="placeholder-text">Ready to Roll</div>
+                <div id="rollingDisplay" class="rolling-display hidden"></div>
+                <div id="winnersGrid" class="winners-grid hidden"></div>
+            </div>
+        </main>
+
+        <!-- History Panel -->
+        <aside class="history-panel glass-panel">
+            <div class="history-header">
+                <h2>🏆 Winners History</h2>
+                <button id="exportBtn" class="icon-btn" title="Export to Excel">📥 Export</button>
+            </div>
+            <div class="history-list-container">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- Winners go here -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="totalWinners" class="status-text">Total: 0</div>
+        </aside>
+    </div>
+
+    <!-- Celebration Overlay -->
+    <div id="confetti-canvas"></div>
+
+    <!-- Grand Reveal Modal -->
+    <div id="grandRevealModal" class="grand-modal hidden">
+        <div class="grand-content">
+            <h2 class="grand-title">✨ CONGRATULATIONS ✨</h2>
+            <div id="grandWinnersList" class="grand-winners-list">
+                <!-- Winners injected here -->
+            </div>
+            <button id="closeGrandBtn" class="grand-close-btn">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
